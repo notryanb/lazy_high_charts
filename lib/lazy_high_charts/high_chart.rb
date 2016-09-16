@@ -74,8 +74,8 @@ module LazyHighCharts
       data
     end
 
-    def export_chart(opts = {})
-      #test_method
+    def to_image
+      export_chart
     end
 
     private
