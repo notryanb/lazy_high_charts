@@ -1,7 +1,7 @@
-
 module LazyHighCharts
   class HighChart
     include LayoutHelper
+    include ImageExporter
 
     SERIES_OPTIONS = %w(data index legendIndex name stack type xAxis yAxis)
 
@@ -72,6 +72,10 @@ module LazyHighCharts
       data = self.options.clone
       data[:series] = self.series_data.clone
       data
+    end
+
+    def export_chart(opts = {})
+      #test_method
     end
 
     private

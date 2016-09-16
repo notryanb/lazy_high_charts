@@ -11,3 +11,4 @@ Gemfile.lock
 .bundle
 *.gem
 .rvmrc
+.ruby-version
