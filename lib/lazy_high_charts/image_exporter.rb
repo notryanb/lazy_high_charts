@@ -1,6 +1,3 @@
-require 'net/http'
-require 'uri'
-
 module LazyHighCharts
   module ImageExporter
     HIGHCHARTS_URI = 'https://export.highcharts.com/'

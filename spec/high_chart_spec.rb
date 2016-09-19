@@ -124,7 +124,7 @@ describe "HighChart" do
         f.chart({:defaultSeriesType => "spline", :renderTo => "myRenderArea", :inverted => true})
         f.subtitle({:text => "Bar"})
       end
-      expect(chart.to_image).to eq("Bar")
+      expect(chart.to_image).to include("PNG")
     end
 
     it 'should override entire option by default when resetting it again' do
