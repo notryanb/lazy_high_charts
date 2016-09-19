@@ -2,7 +2,7 @@ module LazyHighCharts
   module ImageExporter
     HIGHCHARTS_URI = 'https://export.highcharts.com/'
 
-    def export_chart(format: :png)
+    def export_chart(format)
       highcharts_response(format)
     end
 

@@ -74,8 +74,8 @@ module LazyHighCharts
       data
     end
 
-    def to_image
-      export_chart
+    def to_image(format: :png)
+      export_chart(format)
     end
 
     private
