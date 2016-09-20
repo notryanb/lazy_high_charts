@@ -28,23 +28,23 @@ module LazyHighCharts
       build_html_output("StockChart", placeholder, object, &block)
     end
 
-    def high_graph_png(placeholder, object)
-      "<img id=#{placeholder} src='data:image/png;base64,#{to_base_64(object.export_chart)}' />".html_safe
-    end
-    
-    def high_graph_jpeg(placeholder, object)
-      "<img id=#{placeholder} src='data:image/jpeg;base64,#{to_base_64(object.export_chart(type: 'image/jpeg'))}' />".html_safe
-    end
-    
-    def high_graph_svg(placeholder, object)
-      "<img id=#{placeholder} src='data:image/svg+xml;base64,#{to_base_64(object.export_chart(type: 'image/svg+xml'))}' />".html_safe
-    end
-    
-    def high_graph_pdf(placeholder, object)
-      "<object id=#{placeholder} width='100%' height='100' data='data:application/pdf;base64,#{to_base_64(object.export_chart(type: 'application/pdf'))}' type='application/pdf'></object>".html_safe
+    def high_graph_export(object, opts={})
+      return build_pdf_display(object, opts) if opts[:type] == 'application/pdf'
+      opts[:type] ||= 'image/png'
+      build_img_display(object, opts)
     end
 
     private
+
+    def build_img_display(object, opts)
+      base_64_enc = to_base_64(object.export_chart(opts))
+      "<img src='data:#{opts[:type]};base64,#{base_64_enc}' />".html_safe  
+    end
+    
+    def build_pdf_display(object, opts)
+      base_64_enc = to_base_64(object.export_chart(opts))
+      "<object width='100%' height='100%' data='data:#{opts[:type]};base64,#{base_64_enc}' type=#{opts[:type]}></object>".html_safe
+    end
 
     def to_base_64(string)
       Base64.encode64(string)
