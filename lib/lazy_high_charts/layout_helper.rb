@@ -31,6 +31,18 @@ module LazyHighCharts
     def high_graph_png(placeholder, object)
       "<img id=#{placeholder} src='data:image/png;base64,#{to_base_64(object.export_chart)}' />".html_safe
     end
+    
+    def high_graph_jpeg(placeholder, object)
+      "<img id=#{placeholder} src='data:image/jpeg;base64,#{to_base_64(object.export_chart(type: 'image/jpeg'))}' />".html_safe
+    end
+    
+    def high_graph_svg(placeholder, object)
+      "<img id=#{placeholder} src='data:image/svg+xml;base64,#{to_base_64(object.export_chart(type: 'image/svg+xml'))}' />".html_safe
+    end
+    
+    def high_graph_pdf(placeholder, object)
+      "<object id=#{placeholder} width='100%' height='100' data='data:application/pdf;base64,#{to_base_64(object.export_chart(type: 'application/pdf'))}' type='application/pdf'></object>".html_safe
+    end
 
     private
 
