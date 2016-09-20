@@ -1,8 +1,12 @@
 module LazyHighCharts
   module ImageExporter
     HIGHCHARTS_URI = 'https://export.highcharts.com/'
-
-    def export_chart(opts)
+    
+    # Refer to Highcharts Export Docs for valid POST Parameters
+    # Defaults to 'image/png'
+    #
+    # http://www.highcharts.com/docs/export-module/export-module-overview
+    def export_chart(opts = {})
       params = post_params(opts)
       highcharts_response(params)
     end

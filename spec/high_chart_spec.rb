@@ -125,19 +125,19 @@ describe "HighChart" do
       end
       
       it "should export PNG" do
-        expect(chart.to_image).to include("PNG")
+        expect(chart.export_chart).to include("PNG")
       end
 
       it "should export JPEG" do
-        expect(chart.to_image(type: 'image/jpeg')).to include("JFIF")
+        expect(chart.export_chart(type: 'image/jpeg')).to include("JFIF")
       end
     
       it "should export PDF" do
-        expect(chart.to_image(type: 'application/pdf')).to include("PDF")
+        expect(chart.export_chart(type: 'application/pdf')).to include("PDF")
       end
       
       it "should export SVG" do
-        expect(chart.to_image(type: 'image/svg+xml')).to include("svg")
+        expect(chart.export_chart(type: 'image/svg+xml')).to include("svg")
       end
     end
     

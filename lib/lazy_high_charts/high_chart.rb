@@ -74,10 +74,6 @@ module LazyHighCharts
       data
     end
 
-    def to_image(opts = {})
-      export_chart(opts)
-    end
-
     private
 
     def random_canvas_id

@@ -28,7 +28,15 @@ module LazyHighCharts
       build_html_output("StockChart", placeholder, object, &block)
     end
 
+    def high_graph_png(placeholder, object)
+      "<img id=#{placeholder} src='data:image/png;base64,#{to_base_64(object.export_chart)}' />".html_safe
+    end
+
     private
+
+    def to_base_64(string)
+      Base64.encode64(string)
+    end
 
     def build_html_output(type, placeholder, object, &block)
       core_js =<<-EOJS
