@@ -114,32 +114,33 @@ describe "HighChart" do
       expect(chart.options[:subtitle][:text]).to eq("Bar")
     end
 
-    it "should export PNG" do
+    describe 'exporting a chart' do
       chart = LazyHighCharts::HighChart.new('graph') do |f|
         f.series(:name => 'John', :data => [3, 20])
         f.series(:name => 'Jane', :data => [1, 3])
         f.title({:text => nil})
-        # without overriding 
         f.x_axis(:categories => ["uno", "dos", "tres", "cuatro"], :labels => {:rotation => -45, :align => 'right'})
         f.chart({:defaultSeriesType => "spline", :renderTo => "myRenderArea", :inverted => true})
         f.subtitle({:text => "Bar"})
       end
-      expect(chart.to_image).to include("PNG")
+      
+      it "should export PNG" do
+        expect(chart.to_image).to include("PNG")
+      end
+
+      it "should export JPEG" do
+        expect(chart.to_image(type: 'image/jpeg')).to include("JFIF")
+      end
+    
+      it "should export PDF" do
+        expect(chart.to_image(type: 'application/pdf')).to include("PDF")
+      end
+      
+      it "should export SVG" do
+        expect(chart.to_image(type: 'image/svg+xml')).to include("svg")
+      end
     end
     
-    it "should export JPEG" do
-      chart = LazyHighCharts::HighChart.new('graph') do |f|
-        f.series(:name => 'John', :data => [3, 20])
-        f.series(:name => 'Jane', :data => [1, 3])
-        f.title({:text => nil})
-        # without overriding 
-        f.x_axis(:categories => ["uno", "dos", "tres", "cuatro"], :labels => {:rotation => -45, :align => 'right'})
-        f.chart({:defaultSeriesType => "spline", :renderTo => "myRenderArea", :inverted => true})
-        f.subtitle({:text => "Bar"})
-      end
-      expect(chart.to_image(format: :jpeg)).to include("JFIF")
-    end
-
     it 'should override entire option by default when resetting it again' do
       chart = LazyHighCharts::HighChart.new('graph') do |f|
         f.xAxis(categories: [3, 5, 7])
